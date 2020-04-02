@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#div_table_debate{
+	width: 600px; background : yellowgreen; text-align: center;
+}
+
+#div_pageNumber{
+
+	margin: 0 auto;
+	background : yellow;
+}
+
+#header{
+	width: 600px; background : yellow;
+}

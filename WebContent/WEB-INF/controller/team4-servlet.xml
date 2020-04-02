@@ -15,6 +15,22 @@
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="1" />  <!-- 지정 안해주면 다운로드 받을시 에러남. -->
 	</bean>
-
 	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@192.168.0.252:1521:orcl"
+		p:username="git04"
+		p:password="git04"
+	/>
+  
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml" />		
+	</bean>
+	
+	<bean id = "sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache" >
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
 </beans>

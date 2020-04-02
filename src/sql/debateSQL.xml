@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="debate">
   	
-  	<select id = "countAll" resultType="int">
+  	<select id="countAll" resultType="int">
   		select count(*) from debate
   	</select>
   	
+  	<select id = "selectAll" parameterType="hashMap" resultType="debateVO">
+  		<![CDATA[
+  			select num, sub, link, ok, nok, reg, readcount, r
+  			from (select num, sub, link, ok, nok, reg, readcount, rownum r
+  			from (select num, sub, link, ok, nok, reg, readcount, rownum r
+  			from debate) order by reg)
+  			where r >= #{start} and r <=#{end}    		
+  		]]>
+  	</select>
+  	
+  	<insert id="insertDebate" parameterType="debateVO">
+  		insert into debate values(debate_seq.nextval, #{sub}, #{link}, 0, 0, sysdate, 0)
+  	</insert>
+  	
   
   </mapper>
- -->  
+ 

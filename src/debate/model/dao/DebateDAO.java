@@ -1,31 +1,17 @@
 package debate.model.dao;
 
-import org.mybatis.spring.SqlSessionTemplate;
+import java.util.List;
 
-public class DebateDAO {
+import debate.model.vo.DebateVO;
 
-	private SqlSessionTemplate sqlSession = null;
-	public void setSqlSession(SqlSessionTemplate sqlSession) {
-		this.sqlSession = sqlSession;
-	}
+public interface DebateDAO {
+
+	public String getDebateArticle(int num) throws Exception;
 	
-	public String getDebateArticle(int num) {
-		
-		
-		
-		
-		return "";
-	}
+	public int getArticleCount() throws Exception;
 	
-	public int getArticleCount() throws Exception{
-		
-		int count = (Integer)sqlSession.selectOne("debate.countAll");
-		
-		return count;
-	}
+	public List getArticleList(int startRow, int endRow) throws Exception;
 	
-	
-	
-	
+	public void insertDebate(DebateVO vo) throws Exception;
 	
 }
