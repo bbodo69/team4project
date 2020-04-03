@@ -50,5 +50,22 @@ public class DebateDAOImple implements DebateDAO{
 				
 	}
 	
+	public DebateVO getArticle(int num) throws Exception{
+		
+		DebateVO vo = new DebateVO();
+		vo = sqlSession.selectOne("debate.getArticle", num);
+		int readcount = vo.getReadcount() + 1;
+		vo.setReadcount(readcount);		
+				
+		return vo;
+	}
+	
+	public int getReadcount(int num) throws Exception{
+		
+			int readcount = sqlSession.selectOne("debate.getReadcount", num);
+		
+		return readcount;
+	}
+	
 	
 }

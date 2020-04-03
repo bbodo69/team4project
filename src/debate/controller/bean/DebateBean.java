@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import debate.model.dao.DebateDAOImple;
 import debate.model.vo.DebateVO;
@@ -18,11 +19,20 @@ public class DebateBean{
 	
 	@Autowired
 	private DebateDAOImple debateDAO = null;
+	
+	@RequestMapping("test.do")
+	public String test() {
+		
+		return "debate/test";
+	}
 
 	@RequestMapping("debateBoard.do")
-	public String test() throws Exception{
-	
-		debateDAO.getArticleCount();
+	public String debataBoard(DebateVO vo, int num, int pageNum, Model md) throws Exception{
+		
+		System.out.println(num + " = num");
+		vo = debateDAO.getArticle(num);	
+		md.addAttribute("pageNum", pageNum);
+		md.addAttribute("article", vo);
 		
 		return "debate/debateBoard";
 	}
@@ -78,6 +88,20 @@ public class DebateBean{
 		debateDAO.insertDebate(vo);		
 		
 		return "debate/debateBoardMain";
+	}
+	
+	@RequestMapping("debateReple.do")
+	public String debateReple() {
+		
+		return "debate/debateReple";
+	}
+	
+	@RequestMapping("debateReplePro.do")
+	@ResponseBody
+	public String debateReplePro(String comment) {
+		
+		System.out.println(comment);
+		return "success";
 	}
 	
 }

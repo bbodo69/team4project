@@ -14,4 +14,8 @@ public interface DebateDAO {
 	
 	public void insertDebate(DebateVO vo) throws Exception;
 	
+	public DebateVO getArticle(int num) throws Exception;
+	
+	public int getReadcount(int num) throws Exception;
+	
 }

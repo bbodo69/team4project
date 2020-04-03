@@ -23,7 +23,14 @@
   	<insert id="insertDebate" parameterType="debateVO">
   		insert into debate values(debate_seq.nextval, #{sub}, #{link}, 0, 0, sysdate, 0)
   	</insert>
-  	
+  
+  	<select id="getArticle" parameterType="int" resultType="debateVO">
+  		select * from debate where num=#{num}  		
+  	</select>
+  
+  	<select id="getReadcount" parameterType="int" resultType="int">
+  		select readcount from debate where num=#{num}  	
+  	</select>
   
   </mapper>
  
